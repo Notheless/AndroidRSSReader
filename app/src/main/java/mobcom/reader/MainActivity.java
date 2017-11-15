@@ -44,6 +44,11 @@ class RssFeedModel {
 
 public class MainActivity extends AppCompatActivity
 {
+    private static String TAG = "PermissionDemo";
+    private static final int REQUEST_WRITE_STORAGE = 112;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -83,7 +88,11 @@ public class MainActivity extends AppCompatActivity
         new RSS_Process().execute((Void) null);
 
         WebView myWebView = (WebView) findViewById(R.id.webView);
-        myWebView.loadUrl("file:///storage/emulated/0/test.html");
+        String sart = "file:///";
+        String path = Environment.getExternalStorageDirectory().getPath();
+        String fileName = "/Test.html";
+        String linnk = sart+path+fileName;
+        myWebView.loadUrl(linnk);
     }
     public  void test (String path,String name)
     {
@@ -112,15 +121,20 @@ public class MainActivity extends AppCompatActivity
         String fileName = "Test.html";
         File file = new File(path, fileName);
         String html = "<html><head><title>"+path+fileName+"</title></head><body>";
+        html += "<div>";
+        html += "<table>";
         for (int i = 0; i < items.size(); i++) {
-            html += "<div>";
-            html += "<a href=\""+items.get(i).link+"\">";
-            html += items.get(i).title + "<br>"+items.get(i).description+"</a>";
-            html += "</div><br>";
+            html += "<tr>";
+            html += "<td><a href=\""+items.get(i).link+"\">Link</a></td>";
+            html += "<td>"+items.get(i).title+"</td>";
+            html += "<td>"+items.get(i).description+"</td>";
+            html += "</tr>";
         }
+        html += "</table></div><br>";
         html+= "</body></html>";
         try
         {
+
             FileOutputStream out = new FileOutputStream(file);
             byte[] data = html.getBytes();
             out.write(data);
