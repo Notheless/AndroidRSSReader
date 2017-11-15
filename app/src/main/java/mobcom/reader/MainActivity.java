@@ -1,5 +1,8 @@
 package mobcom.reader;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -36,10 +39,11 @@ class RssFeedModel {
     public String description;
     public String img;
 
-    public RssFeedModel(String title, String link, String description) {
+    public RssFeedModel(String title, String link, String description,String img) {
         this.title = title;
         this.link = link;
         this.description = description;
+        this.img = img;
     }
 }
 
@@ -83,10 +87,25 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    public  void message()
+
+    {
+        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+        alertDialog.setTitle("Alert");
+        alertDialog.setMessage("Alert message to be shown");
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
+    }
+
     public void RSS_button(View view)
     {
 
-        new RSS_Process().execute((Void) null);
+        new RSS_Process().execute("https://rss.detik.com");
 
         WebView myWebView = (WebView) findViewById(R.id.webView);
         String sart = "file:///";
@@ -105,12 +124,13 @@ public class MainActivity extends AppCompatActivity
         File file = new File(path, fileName);
         String html = "<html><head><title>"+path+fileName+"</title></head><body>"+entar;
         html += "<div>"+entar;
-        html += "<table>"+entar;
-        for (int i = 0; i < items.size(); i++) {
+        html += "<table border=\"1\">"+entar;
+        for (int i = 1; i < items.size(); i++) {
             html += "<tr>"+entar;
             html += "<td><a href=\""+items.get(i).link+"\">Link</a></td>"+entar;
             html += "<td>"+items.get(i).title+"</td>"+entar;
             html += "<td>"+items.get(i).description+"</td>"+entar;
+            html += "<td>."+items.get(i).img+"</td>"+entar;
             html += "</tr>"+entar;
         }
         html += "</table></div><br>"+entar;
@@ -133,86 +153,97 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private class RSS_Process extends AsyncTask<Void, Void, Boolean>
+    private class RSS_Process extends AsyncTask<String, Void, Boolean>
     {
 
         @Override
-        protected Boolean doInBackground(Void... voids) {
+        protected Boolean doInBackground(String... x) {
 
-            String linkurl = "https://rss.detik.com";
+            String[] linkurl = x;
+            int n = linkurl.length;
             URL url = null;
             boolean isItem = false;
             String title = null;
             String link = null;
             String description = null;
+            String img = "";
             List<RssFeedModel> items = new ArrayList<>();
             try {
-                url = new URL(linkurl);
-                InputStream inputStream = url.openConnection().getInputStream();
 
-                XmlPullParser xmlPullParser = Xml.newPullParser();
-                xmlPullParser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
-                xmlPullParser.setInput(inputStream, null);
-                xmlPullParser.nextTag();
-                while (xmlPullParser.next() != XmlPullParser.END_DOCUMENT) {
-                    int eventType = xmlPullParser.getEventType();
+                for (int i = 0; i < n; i++) {
+                    url = new URL(linkurl[i]);
+                    InputStream inputStream = url.openConnection().getInputStream();
 
-                    String name = xmlPullParser.getName();
-                    if (name == null)
-                        continue;
+                    XmlPullParser xmlPullParser = Xml.newPullParser();
+                    xmlPullParser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+                    xmlPullParser.setInput(inputStream, null);
+                    xmlPullParser.nextTag();
+                    while (xmlPullParser.next() != XmlPullParser.END_DOCUMENT) {
+                        int eventType = xmlPullParser.getEventType();
 
-                    if (eventType == XmlPullParser.END_TAG) {
-                        if (name.equalsIgnoreCase("item")) {
-                            isItem = false;
-                        }
-                        continue;
-                    }
+                        String name = xmlPullParser.getName();
+                        if (name == null)
+                            continue;
 
-                    if (eventType == XmlPullParser.START_TAG) {
-                        if (name.equalsIgnoreCase("item")) {
-                            isItem = true;
+                        if (eventType == XmlPullParser.END_TAG) {
+                            if (name.equalsIgnoreCase("item")) {
+                                isItem = false;
+                            }
                             continue;
                         }
-                    }
-                    String result = "";
-                    if (xmlPullParser.next() == XmlPullParser.TEXT) {
-                        result = xmlPullParser.getText();
-                        xmlPullParser.nextTag();
-                    }
-                    if (name.equalsIgnoreCase("title")) {
-                        title = result;
-                    } else if (name.equalsIgnoreCase("link")) {
-                        link = result;
-                    } else if (name.equalsIgnoreCase("description")) {
-                        description = result;
-                    }
-                    if (title != null && link != null && description != null) {
-                        if (isItem) {
-                            RssFeedModel item = new RssFeedModel(title, link, description);
-                            items.add(item);
-                        }
-                        title = null;
-                        link = null;
-                        description = null;
-                        isItem = false;
-                    }
-                }
 
-                inputStream.close();
-                //mRecyclerView.setAdapter(new RssFeedListAdapter(items));
-            }
-            catch (MalformedURLException e)
-            {
-                e.printStackTrace();
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
-            catch (XmlPullParserException e)
-            {
-                e.printStackTrace();
-            }
+                        if (eventType == XmlPullParser.START_TAG) {
+                            if (name.equalsIgnoreCase("item")) {
+                                isItem = true;
+                                continue;
+                            }
+                        }
+                        String result = "";
+                        if (xmlPullParser.next() == XmlPullParser.TEXT) {
+                            result = xmlPullParser.getText();
+                            xmlPullParser.nextTag();
+                        }
+                        if (name.equalsIgnoreCase("title")) {
+                            title = result;
+                        } else if (name.equalsIgnoreCase("link")) {
+                            link = result;
+                        } else if (name.equalsIgnoreCase("description")) {
+                            if (result.indexOf('>') > 0) {
+                                int start = result.indexOf('>');
+                                img = result.substring(0, start);
+                                ;
+                                result = result.substring(start + 1, result.length());
+                            }
+                            description = result;
+                        }
+                        if (title != null && link != null && description != null) {
+                            if (isItem) {
+                                RssFeedModel item = new RssFeedModel(title, link, description, img);
+                                items.add(item);
+                            }
+                            title = null;
+                            link = null;
+                            description = null;
+                            isItem = false;
+                        }
+                    }
+
+                    inputStream.close();
+                    //mRecyclerView.setAdapter(new RssFeedListAdapter(items));
+                }
+                }
+                catch(MalformedURLException e)
+                {
+                    e.printStackTrace();
+                }
+                catch(IOException e)
+                {
+                    e.printStackTrace();
+                }
+                catch(XmlPullParserException e)
+                {
+                    e.printStackTrace();
+                }
             htmlSave(items);
 
         return true;
