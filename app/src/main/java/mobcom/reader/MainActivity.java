@@ -47,8 +47,6 @@ public class MainActivity extends AppCompatActivity
     private static String TAG = "PermissionDemo";
     private static final int REQUEST_WRITE_STORAGE = 112;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
