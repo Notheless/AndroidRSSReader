@@ -27,11 +27,14 @@ import java.util.List;
 
 
 
+
+
 class RssFeedModel {
 
     public String title;
     public String link;
     public String description;
+    public String img;
 
     public RssFeedModel(String title, String link, String description) {
         this.title = title;
@@ -92,44 +95,26 @@ public class MainActivity extends AppCompatActivity
         String linnk = sart+path+fileName;
         myWebView.loadUrl(linnk);
     }
-    public  void test (String path,String name)
-    {
-        File file = new File(path, name +".html");
-        try
-        {
-            FileOutputStream out = new FileOutputStream(file);
-            byte[] data = name.getBytes();
-            out.write(data);
-            out.close();
-        }
-        catch (FileNotFoundException e)
-        {
-            e.printStackTrace();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
 
-    }
     public void htmlSave ( List<RssFeedModel> items)
     {
 
+        String entar = Character.toString ((char) 13);
         String path = Environment.getExternalStorageDirectory().getPath();
         String fileName = "Test.html";
         File file = new File(path, fileName);
-        String html = "<html><head><title>"+path+fileName+"</title></head><body>";
-        html += "<div>";
-        html += "<table>";
+        String html = "<html><head><title>"+path+fileName+"</title></head><body>"+entar;
+        html += "<div>"+entar;
+        html += "<table>"+entar;
         for (int i = 0; i < items.size(); i++) {
-            html += "<tr>";
-            html += "<td><a href=\""+items.get(i).link+"\">Link</a></td>";
-            html += "<td>"+items.get(i).title+"</td>";
-            html += "<td>"+items.get(i).description+"</td>";
-            html += "</tr>";
+            html += "<tr>"+entar;
+            html += "<td><a href=\""+items.get(i).link+"\">Link</a></td>"+entar;
+            html += "<td>"+items.get(i).title+"</td>"+entar;
+            html += "<td>"+items.get(i).description+"</td>"+entar;
+            html += "</tr>"+entar;
         }
-        html += "</table></div><br>";
-        html+= "</body></html>";
+        html += "</table></div><br>"+entar;
+        html+= "</body></html>"+entar;
         try
         {
 
