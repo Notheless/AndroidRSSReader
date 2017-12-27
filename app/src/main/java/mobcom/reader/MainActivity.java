@@ -104,6 +104,7 @@ public class MainActivity extends AppCompatActivity
         alertDialog.show();
     }
 
+
     public void RSS_button(View view)
     {
 
@@ -152,7 +153,7 @@ public class MainActivity extends AppCompatActivity
         for (int i = 1; i < items.size(); i++) {
             html += "<div class=\"main-box\">"+entar;
             html += "<a href=\""+items.get(i).link+"\" style=\"display:block\">"+entar;
-            html += "<div class\"pic-box\" style=:\"width 50px\">"+entar;
+            html += "<div class\"pic-box\" >"+entar; //style=:"width 50px"
             html += items.get(i).img+entar;
             //html += "<img src=\""+items.get(i).link+"\" align=\"left\" hspace=\"7\" width=\"100\" />"+entar;
             html += "</div>"+entar;
@@ -188,8 +189,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private class RSS_Process extends AsyncTask<String, Void, Boolean>
-    {
+    private class RSS_Process extends AsyncTask<String, Void, Boolean> {
 
         @Override
         protected Boolean doInBackground(String... x) {
@@ -246,7 +246,6 @@ public class MainActivity extends AppCompatActivity
                             if (result.indexOf('>') > 0) {
                                 int start = result.indexOf('>');
                                 img = result.substring(0, start);
-                                ;
                                 result = result.substring(start + 1, result.length());
                             }
                             description = result;
@@ -266,24 +265,16 @@ public class MainActivity extends AppCompatActivity
                     inputStream.close();
                     //mRecyclerView.setAdapter(new RssFeedListAdapter(items));
                 }
-                }
-                catch(MalformedURLException e)
-                {
-                    e.printStackTrace();
-                }
-                catch(IOException e)
-                {
-                    e.printStackTrace();
-                }
-                catch(XmlPullParserException e)
-                {
-                    e.printStackTrace();
-                }
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (XmlPullParserException e) {
+                e.printStackTrace();
+            }
             htmlSave(items);
 
-        return true;
+            return true;
         }
-
-
     }
 }

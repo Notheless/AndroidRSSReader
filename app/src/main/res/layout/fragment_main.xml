@@ -10,7 +10,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Fetch"
+        android:text="@string/fetch"
         android:id="@+id/FetchB"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -30,4 +30,5 @@
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/FetchB"
         android:layout_alignEnd="@+id/FetchB" />
+
 </RelativeLayout>
