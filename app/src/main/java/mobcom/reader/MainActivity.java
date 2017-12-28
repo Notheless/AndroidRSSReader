@@ -104,16 +104,32 @@ public class MainActivity extends AppCompatActivity
         String fileName = "Test.html";
         File file = new File(path, fileName);
         String html = "<html><head><title>"+path+fileName+"</title></head><body>"+entar;
-        html += "<div>"+entar;
-        html += "<table>"+entar;
+        html += "<div class=\"head\">"+entar;
+        html += "<div class=\"title\">"+entar;
+        html += "<h1>HARI INI</h1>"+entar;
+        html += "</div>"+entar;
+        html += "</div>"+entar;
+        html += "<div class=\"container\">"+entar;
+        
         for (int i = 0; i < items.size(); i++) {
-            html += "<tr>"+entar;
-            html += "<td><a href=\""+items.get(i).link+"\">Link</a></td>"+entar;
-            html += "<td>"+items.get(i).title+"</td>"+entar;
-            html += "<td>"+items.get(i).description+"</td>"+entar;
-            html += "</tr>"+entar;
+            html += "<div class=\"main-box\">"+entar;
+            html += "<a href=\""+items.get(i).link+"\" style=\"display:block\">"+entar;
+            html += "<div class=\"href\"></div>"+entar;
+            html += "</a>"+entar;
+            html += "<div class\"pic-box\">"+entar;
+            html += "<img src=\"\" align=\"left\" hspace=\"7\" width=\"100\" />"+entar;
+            html += "</div>"+entar;
+            html += "<div class=\"text-box\">"+entar;
+            html += "<div class=\"header\">"+entar;
+            html += "<h2>"+items.get(i).title+"</h2>"+entar;
+            html += "</div>"+entar;
+            html += "<div class=\"para\">"+entar;
+            html += "<p>"+items.get(i).description+"</p>"+entar;
+            html += "</div>"+entar;
+            html += "</div>"+entar;
+            html += "</div>";
         }
-        html += "</table></div><br>"+entar;
+        html += "</div>"+entar;
         html+= "</body></html>"+entar;
         try
         {
