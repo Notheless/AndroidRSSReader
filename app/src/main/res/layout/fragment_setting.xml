@@ -1,0 +1,137 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.admin.drawer.Setting">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="\n\u0009 Berita Indonesia"
+        android:textSize="20sp" />
+
+    <Switch
+        android:id="@+id/Bindo1"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/textView6"
+        android:layout_marginLeft="47dp"
+        android:layout_marginStart="47dp"
+        android:checked="false"
+        android:text="vivanews \u0009 "
+        android:textSize="18sp"
+        android:onClick="changeSwitchstate"
+        tools:checked="false" />
+
+    <Switch
+        android:id="@+id/Bindo2"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/textView6"
+        android:layout_toEndOf="@+id/Bindo1"
+        android:layout_toRightOf="@+id/Bindo1"
+        android:text="detik \u0009 "
+        android:onClick="changeSwitchstate"
+        android:textSize="18sp" />
+
+    <Switch
+        android:id="@+id/Bindo3"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@+id/Bindo1"
+        android:layout_alignStart="@+id/Bindo1"
+        android:layout_below="@+id/Bindo1"
+        android:text="antaranews \u0009 "
+        android:onClick="changeSwitchstate"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/Bindo3"
+        android:text="\n\u0009 Berita Internasional"
+        android:textSize="20sp" />
+
+    <Switch
+        android:id="@+id/Bing1"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/textView5"
+        android:layout_marginLeft="47dp"
+        android:layout_marginStart="47dp"
+        android:text="nytimes \u0009 "
+        android:onClick="changeSwitchstate"
+        android:textSize="18sp" />
+
+    <Switch
+        android:id="@+id/Bing2"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/textView5"
+        android:layout_toEndOf="@+id/Bing1"
+        android:layout_toRightOf="@+id/Bing1"
+        android:text="skynews \u0009 "
+        android:onClick="changeSwitchstate"
+        android:textSize="18sp" />
+
+    <Switch
+        android:id="@+id/Bing3"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@+id/Bing1"
+        android:layout_alignStart="@+id/Bing1"
+        android:layout_below="@+id/Bing1"
+        android:text="cbn \u0009 "
+        android:onClick="changeSwitchstate"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/Bing3"
+        android:text="\n\u0009 Berita Internasional"
+        android:textSize="20sp" />
+
+    <Switch
+        android:id="@+id/bol1"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@+id/Bing3"
+        android:layout_alignStart="@+id/Bing3"
+        android:layout_below="@+id/textView7"
+        android:text="foxsports \u0009 "
+        android:onClick="changeSwitchstate"
+        android:textSize="18sp" />
+
+    <Switch
+        android:id="@+id/bol2"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/textView7"
+        android:layout_toEndOf="@+id/bol1"
+        android:layout_toRightOf="@+id/bol1"
+        android:text="espn \u0009 "
+        android:onClick="changeSwitchstate"
+        android:textSize="18sp" />
+
+    <Switch
+        android:id="@+id/bol3"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/bol2"
+        android:layout_toLeftOf="@+id/bol2"
+        android:layout_toStartOf="@+id/bol2"
+        android:text="nypost \u0009 "
+        android:onClick="changeSwitchstate"
+        android:textSize="18sp" />
+
+</RelativeLayout>

@@ -1,0 +1,95 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.admin.drawer.Home">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/fetchC"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/fetchC"
+        android:layout_below="@+id/fetchC">
+
+    </WebView>
+
+    <Button
+        android:id="@+id/fetchC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/fetchB"
+        android:layout_toRightOf="@+id/fetchB"
+        android:visibility="gone"
+        android:enabled="true"
+        android:onClick="RSS_Olahraga"
+        android:text="@string/Olahraga" />
+
+    <Button
+        android:id="@+id/fetchB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        android:enabled="true"
+        android:onClick="RSS_Internasional"
+        android:text="@string/Internasional" />
+
+    <Button
+        android:id="@+id/fetchA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/fetchB"
+        android:layout_toStartOf="@+id/fetchB"
+        android:visibility="gone"
+        android:enabled="true"
+        android:onClick="RSS_Nasional"
+        android:text="@string/Nasional"
+        tools:layout_editor_absoluteX="26dp"
+        tools:layout_editor_absoluteY="15dp" />
+
+    <Button
+        android:id="@+id/fetchA2"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/fetchC"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="120dp"
+        android:enabled="true"
+        android:onClick="RSS_Nasional"
+        android:text="@string/Nasional" />
+
+    <Button
+        android:id="@+id/fetchB2"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/fetchA2"
+        android:layout_centerHorizontal="true"
+        android:enabled="true"
+        android:onClick="RSS_Internasional"
+        android:text="@string/Internasional" />
+
+    <Button
+        android:id="@+id/fetchC2"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/fetchB2"
+        android:layout_centerHorizontal="true"
+        android:enabled="true"
+        android:onClick="RSS_Olahraga"
+        android:text="@string/Olahraga" />
+
+</RelativeLayout>
